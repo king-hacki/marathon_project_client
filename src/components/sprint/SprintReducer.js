@@ -1,9 +1,10 @@
 import {
-    GET_LIST_OF_SPRINTS
-} from "../types"
+    GET_LIST_OF_SPRINTS, SAVE_SPRINT, UPDATE_SPRINT, DELETE_SPRINT
+} from "../../types"
 
 const initialState = {
-    sprints: []
+    sprints: [],
+    savedSprint: null
 }
 
 export default function (state = initialState, action) {
@@ -13,6 +14,18 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 sprints: action.payload
+            }
+        case UPDATE_SPRINT:
+        case SAVE_SPRINT:
+            console.log(SAVE_SPRINT)
+            return {
+                ...state,
+                savedSprint: action.payload
+            }
+        case DELETE_SPRINT:
+            console.log(DELETE_SPRINT)
+            return {
+                ...state
             }
         default:
             return {
