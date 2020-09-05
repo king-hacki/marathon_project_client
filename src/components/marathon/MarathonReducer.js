@@ -1,6 +1,6 @@
 import {
     GET_LIST_OF_MARATHONS, SAVE_MARATHON, UPDATE_MARATHON, DELETE_MARATHON
-} from "../types"
+} from "../../types"
 
 const initialState = {
     marathons: [],

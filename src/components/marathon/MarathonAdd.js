@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Button, Form, Container, Segment, Icon} from "semantic-ui-react";
-import {addMarathon, getListOfMarathons} from "../../actions/MarathonAction"
+import {addMarathon, getListOfMarathons} from "./MarathonAction"
 import {Link} from "react-router-dom"
 
 class MarathonAdd extends Component {
@@ -9,11 +9,10 @@ class MarathonAdd extends Component {
     state = {
         title: ""
     }
+
     onChange = e => this.setState({ [e.target.name] : e.target.value})
-    onSubmit = () => {
-        this.props.addMarathon(this.state.title)
-        this.props.getListOfMarathons()
-    }
+    onSubmit = () => this.props.addMarathon(this.state.title)
+
     render() {
         return (
             <Segment>
@@ -39,4 +38,4 @@ class MarathonAdd extends Component {
     }
 }
 
-export default connect(null, {addMarathon, getListOfMarathons})(MarathonAdd);
+export default connect(null, {addMarathon})(MarathonAdd);

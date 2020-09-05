@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getListOfMarathons} from "../actions/MarathonAction.js"
+import {getListOfMarathons, deleteMarathon} from "./MarathonAction.js"
 import PropTypes from 'prop-types';
-import Loading from "./navigation/Loading";
+import Loading from "../navigation/Loading";
 import { Table, Button, Segment, Icon, Container } from 'semantic-ui-react'
 import {Link} from "react-router-dom"
 
@@ -10,10 +10,8 @@ import {Link} from "react-router-dom"
 class MarathonTable extends Component {
 
     componentDidMount() {
-        console.log("MarathonTable")
         this.props.getListOfMarathons()
     }
-
 
     tableRow = () => {
         let number = 1
@@ -24,12 +22,12 @@ class MarathonTable extends Component {
                     <Table.Cell collapsing={true}>{marathon.id}</Table.Cell>
                     <Table.Cell>{marathon.title}</Table.Cell>
                     <Table.Cell collapsing={true}>
-                        <Button as={Link} to={`/sprints/${marathon.id}`}>Go To Sprints</Button>
+                        <Button as={Link} to={`/sprint/${marathon.id}`}>Go To Sprints</Button>
                     </Table.Cell>
                     <Table.Cell collapsing={true}> <Button>Go To Users</Button></Table.Cell>
                     <Table.Cell collapsing={true}>
-                        <Button>Update</Button>
-                        <Button>Delete</Button>
+                        <Button as={Link} to={`/marathon/update/${marathon.id}`}>Update</Button>
+                        <Button onClick={() => this.props.deleteMarathon(marathon.id)}>Delete</Button>
                     </Table.Cell>
                 </Table.Row>
             ))
@@ -42,7 +40,7 @@ class MarathonTable extends Component {
          else return (
              <Segment>
                  <Container>
-                     <Table color={"brown"} compact celled definition>
+                     <Table color={"brown"} compact celled definition sortable>
                          <Table.Header>
                              <Table.Row>
                                  <Table.HeaderCell>Number</Table.HeaderCell>
@@ -90,6 +88,6 @@ const mapStateToProps = state => ({
 })
 
 export default connect( mapStateToProps,
-    {getListOfMarathons})
+    {getListOfMarathons, deleteMarathon})
 (MarathonTable);
 

@@ -1,7 +1,7 @@
 import axios from "axios"
 import {
     GET_LIST_OF_MARATHONS, SAVE_MARATHON, UPDATE_MARATHON, DELETE_MARATHON
-} from "../types"
+} from "../../types"
 
 export const getListOfMarathons = () => dispatch => {
     axios
@@ -11,6 +11,17 @@ export const getListOfMarathons = () => dispatch => {
                 type: GET_LIST_OF_MARATHONS,
                 payload: res.data
             })
+        })
+}
+
+export const deleteMarathon = marathonId => dispatch => {
+    axios
+        .delete(`http://localhost:8081/marathon/delete/${marathonId}`)
+        .then(res => {
+            dispatch({
+                type: DELETE_MARATHON
+            })
+            dispatch(getListOfMarathons())
         })
 }
 
@@ -45,15 +56,8 @@ export const updateMarathon = (title, id) => dispatch => {
                 type: UPDATE_MARATHON,
                 payload: res.data
             })
+            dispatch(getListOfMarathons())
         })
 }
 
-export const deleteMarathon = marathonId => dispatch => {
-    axios
-        .delete(`http://localhost:8081/marathon/delete/${marathonId}`)
-        .then(res => {
-            dispatch({
-                type: DELETE_MARATHON
-            })
-        })
-}
+
