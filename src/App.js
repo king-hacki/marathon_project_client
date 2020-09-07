@@ -3,17 +3,21 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import store from './store'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Navbar from "./components/navigation/Navbar";
-import Footer from "./components/navigation/Footer";
-import MarathonTable from "./components/marathon/MarathonTable";
-import SprintTable from "./components/sprint/SprintTable";
-import MarathonAdd from "./components/marathon/MarathonAdd";
-import MarathonUpdate from "./components/marathon/MarathonUpdate";
-import SprintAdd from "./components/sprint/SprintAdd";
-import TaskTable from "./components/task/TaskTable";
-import TaskAdd from "./components/task/TaskAdd";
-import SprintUpdate from "./components/sprint/SprintUpdate";
-import TaskUpdate from "./components/task/TaskUpdate";
+import Navbar from "./components/admin/navigation/Navbar";
+import Footer from "./components/admin/navigation/Footer";
+import MarathonTable from "./components/admin/marathon/MarathonTable";
+import SprintTable from "./components/admin/sprint/SprintTable";
+import MarathonAdd from "./components/admin/marathon/MarathonAdd";
+import MarathonUpdate from "./components/admin/marathon/MarathonUpdate";
+import SprintAdd from "./components/admin/sprint/SprintAdd";
+import TaskTable from "./components/admin/task/TaskTable";
+import TaskAdd from "./components/admin/task/TaskAdd";
+import SprintUpdate from "./components/admin/sprint/SprintUpdate";
+import TaskUpdate from "./components/admin/task/TaskUpdate";
+import UserTable from "./components/admin/user/UserTable";
+import Home from "./components/admin/navigation/Home";
+import ProgressTable from "./components/admin/progress/ProgressTable";
+import TaskAndSolution from "./components/admin/progress/TaskAndSolution";
 
 class App extends React.Component {
 
@@ -23,6 +27,7 @@ class App extends React.Component {
             <Router>
                 <Navbar/>
                 <Switch>
+                    <Route exact path={"/home"} component={Home} />
                     <Route exact path={"/"} component={MarathonTable} />
                     <Route exact path={"/marathon/list"} component={MarathonTable} />
                     <Route exact path={"/marathon/save"} component={MarathonAdd} />
@@ -33,6 +38,11 @@ class App extends React.Component {
                     <Route exact path={"/task/:sprintId"} component={TaskTable}/>
                     <Route exact path={"/task/save/:sprintId"} component={TaskAdd} />
                     <Route exact path={"/task/:sprintId/update/:taskId"} component={TaskUpdate}/>
+                    <Route exact path={"/user/list"} component={UserTable}/>
+                    <Route exact path={"/user/marathon/:marathonId"} component={UserTable}/>
+                    <Route exact path={"/progress/task/:taskId"} component={ProgressTable}/>
+                    <Route exact path={"/progress/user/:userId"} component={ProgressTable}/>
+                    <Route exact path={"/solution/:progressId"} component={TaskAndSolution}/>
                 </Switch>
                 <Footer/>
             </Router>
